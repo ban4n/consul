@@ -1,7 +1,7 @@
 log_level  = "INFO"
 node_name = "consul-node1"
 # server = true/false -> server/client
-# bootstrap_expect = 1 -> nie stworze clustra poki nie bedzie 1 node / tylko na <node1>
+# bootstrap_expect = 1 -> node czeka na inne nody zeby wybrac leadera
 ui = true
 
 enable_syslog = true
