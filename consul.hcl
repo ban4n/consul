@@ -13,6 +13,11 @@ client_addr    = "0.0.0.0"
 bind_addr      = "<node1>"  # internal communication
 advertise_addr = "<node1>"  # external communication
 
+# jezeli consul mesh/connect:
+connect {
+  enabled = true
+}
+
 # jezeli 3node cluster
 # retry_join = ["<node1>","<node2>","<node3>"]
 
