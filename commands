@@ -1,0 +1,25 @@
+consul version
+consul -autocomplete-install
+consul members [-detailed]
+consul operator raft list-peers
+consul kv get [-recurse | -keys]
+consul catalog [datacenters | nodes | services -tags]
+consul services register/deregister service.hcl
+
+CONNECT/MESH:
+
+INTENTIONS:
+
+API:
+curl --silent[-s] --request[-X] GET [default] http://node01:8500/v1/kv/?recurse | jq
+curl -s --request PUT --data @content http://node01:8500/v1/kv/chemin2/file
+curl -s -X GET http://node01:8500/v1/kv/chemin2/file | jq -r .[].Value | base64 --decode[-d]
+
+BACKUP:
+consul snapshot save backup.snap
+consul snapshot inspect backup.snap
+consul snapshot restore backup.snap
+
+DNS:
+dig @node01 -p 8600 counting.service.consul
+curl http://node01:8500/v1/catalog/service/counting |jq
