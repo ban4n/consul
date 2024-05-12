@@ -23,3 +23,29 @@ consul snapshot restore backup.snap
 DNS:
 dig @node01 -p 8600 counting.service.consul
 curl http://node01:8500/v1/catalog/service/counting |jq
+
+ACL:
+1. Provision the consul cluster
+2. Bootstrap the ACL system
+    config.hcl
+    acl = {
+      enabled = true
+      default_policy = "allow"
+      down_policy = "extend-cache"
+    }
+    systemctl restart consul
+    ------------------------
+    consul acl bootstrap [-format=json]
+    consul acl token list -token ...
+    albo export CONSUL_HTTP_TOKEN=...
+3. Create Policies:
+    consul acl policy list
+    ------------------------
+    service_prefix "eCommerce-Front-End" {
+      policy = "write"
+    }
+    consul acl policy create -name eCommerce -description "eCommerce App" -rules @rules.hcl
+4. Create Token (for policy):
+    consul acl token create -policy-name eCommerce -description "Token for node02"
+    consul acl token list
+
